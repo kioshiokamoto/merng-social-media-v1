@@ -19,25 +19,16 @@ const PostForm = () => {
 			});
 
 			data.getPosts.push(result.data.createPost);
-			//data.getPosts = [result.data.createPost, ...data.getPosts];
 			proxy.writeQuery({ query: FETCH_POST_QUERY, data });
 			value.body = '';
-			
 		},
-		refetchQueries:[
-			{query:FETCH_POST_QUERY}
-		]
-		
+		refetchQueries: [{ query: FETCH_POST_QUERY }],
 	});
 
 	function createPostCallback() {
 		createPost()
-			.then(() => {
-				console.log(`Creado`);
-			})
-			.catch((e) => {
-				console.log(e);
-			});
+			.then(() => {})
+			.catch((e) => {});
 	}
 
 	return (
