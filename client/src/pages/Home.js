@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 import { Grid } from 'semantic-ui-react';
 import PostCard from '../components/PostCard';
 
@@ -10,13 +9,14 @@ import PostForm from '../components/PostForm';
 import { FETCH_POST_QUERY } from '../util/graphql';
 
 const Home = () => {
-	const {user } = useContext(AuthContext);
+	const { user } = useContext(AuthContext);
 
 	const {
 		loading,
-		data: { getPosts: posts } = {},
+		data: { getPosts: posts} ={},
+		
 	} = useQuery(FETCH_POST_QUERY);
-
+	
 	
 	return (
 		<Grid columns={3}>
