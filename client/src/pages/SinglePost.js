@@ -1,11 +1,10 @@
 import { gql, useMutation, useQuery } from '@apollo/client';
-import React, { useContext, useRef, useState } from 'react';
-import { Button, Card, Form, Grid, Icon, Image, Label } from 'semantic-ui-react';
 import moment from 'moment';
-import LikeButton from '../components/LikeButton';
-
-import { AuthContext } from '../context/auth';
+import React, { useContext, useState } from 'react';
+import { Button, Card, Form, Grid, Icon, Image, Label } from 'semantic-ui-react';
 import DeleteButton from '../components/DeleteButton';
+import LikeButton from '../components/LikeButton';
+import { AuthContext } from '../context/auth';
 
 const SinglePost = (props) => {
 	const postId = props.match.params.postId;

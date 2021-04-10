@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Button, Icon, Confirm } from 'semantic-ui-react';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-
+import React, { useState } from 'react';
+import { Button, Confirm, Icon } from 'semantic-ui-react';
 import { FETCH_POST_QUERY } from '../util/graphql';
+import MyPopup from '../util/MyPopup';
 
 const DeleteButton = ({ postId, commentId, callback }) => {
 	const [confirmOpen, setConfirmOpen] = useState(false);
@@ -12,11 +12,11 @@ const DeleteButton = ({ postId, commentId, callback }) => {
 	const [deletePostOrMutation] = useMutation(mutation, {
 		variables: {
 			postId,
-			commentId
+			commentId,
 		},
 		update(proxy) {
 			setConfirmOpen(false);
-			if(!commentId){
+			if (!commentId) {
 				const data = proxy.readQuery({
 					query: FETCH_POST_QUERY,
 				});
@@ -32,9 +32,12 @@ const DeleteButton = ({ postId, commentId, callback }) => {
 	});
 	return (
 		<>
-			<Button as="div" color="red" onClick={() => setConfirmOpen(true)} floated="right">
-				<Icon name="trash" style={{ margin: 0 }} />
-			</Button>
+			<MyPopup content={commentId ? 'Delete comment' : 'Delete post'}>
+				<Button as="div" color="red" onClick={() => setConfirmOpen(true)} floated="right">
+					<Icon name="trash" style={{ margin: 0 }} />
+				</Button>
+			</MyPopup>
+
 			<Confirm open={confirmOpen} onCancel={() => setConfirmOpen(false)} onConfirm={deletePostOrMutation} />
 		</>
 	);
